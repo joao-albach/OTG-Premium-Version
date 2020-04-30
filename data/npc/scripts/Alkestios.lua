@@ -14,7 +14,7 @@ local function creatureSayCallback(cid, type, msg)
 
     local player = Player(cid)
     if msgcontains(msg, 'mission') then
-        if not player:getStorageValue(Storage.ThreatenedDreams.Start) == 1 then
+        if not player:getStorageValue(Storage.ThreatenedDreams.Start) then
             npcHandler:say("I indeed have some troubles since I'm travelling this part of the world. When I took over the body of a white deer I wasn't aware that such an animal is a sought after quarry for hunters and poachers. ...", cid)
             npcHandler:say("Now I'm living in the constant danger of being caught and killed. Of course, I could just take over another animal but this deer has really grown on me. I'd like to help this beautiful stag but I need your assistance. Are you willing to help me?", cid)
             npcHandler.topic[cid] = 1

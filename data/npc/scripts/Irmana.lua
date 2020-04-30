@@ -79,6 +79,15 @@ function creatureSayCallback(cid, type, msg)
 			else
 				npcHandler:say('Are you trying to mess with me?!', cid)
 			end
+		elseif npcHandler.topic[cid] == 8 then
+			if player:removeMoneyNpc(1000) then
+				player:addItem(28599, 1)
+				player:setStorageValue(Storage.ThreatenedDreams.TroubledMission02, 5)
+				npcHandler:say('Alright. Here is the fur.', cid)
+			else
+				npcHandler:say('You don\'t have enough money.', cid)
+				npcHandler.topic[cid] = 0
+			end
 		end
 	elseif(msgcontains(msg, "hat") or msgcontains(msg, "accessory")) and (npcHandler.topic[cid] == 2 and getPlayerStorageValue(cid, 1007) < 1) then
 		selfSay("This accessory requires a small fee of 150000 gold pieces. Of course, we do not want to put you at any risk to be attacked while carrying this huge amount of money. ...", cid)
@@ -101,6 +110,11 @@ function creatureSayCallback(cid, type, msg)
 	elseif(msgcontains(msg, "green tunic")) then
 		npcHandler:say("Have you found {150 Green Tunic} for me?", cid)
 		npcHandler.topic[cid] = 7
+	elseif(msgcontains(msg, "green tunic")) and player:getStorageValue(Storage.ThreatenedDreams.TroubledMission02) == 4 then
+		npcHandler:say("A wolf whelp fur? Well, some months ago a hunter came here - a rather scruffy, smelly guy. I had thrown him out instantly but he had to offer some fine pelts. One of them was the fur of a very young wolf. ...", cid)
+		npcHandler:say("I was not delighted that he obviously killed such a young animal. When I confronted him, he said he wanted to raise it as a companion but it unfortunately died. A sad story. In the end, I bought some of his pelts, among them the whelp fur. ...", cid)
+		npcHandler:say("You can have it if this is important for you. I would sell it for 1000 gold. Are you interested?", cid)
+		npcHandler.topic[cid] = 8
 	end
 	return true
 end
