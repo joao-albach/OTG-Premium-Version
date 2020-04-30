@@ -1,5 +1,6 @@
 function onUse(player, item, fromPosition, target, toPosition, isHotkey)
     if target.itemid == 2160 then
+        player:setStorageValue(Storage.ThreatenedDreams.TroubledMission01, 4)
         target:decay()
         item:remove(1)
         player:say("You are placing the book on the table, hopefully the poachers will discover it soon.", TALKTYPE_ORANGE_1)

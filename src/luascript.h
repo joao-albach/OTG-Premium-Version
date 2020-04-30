@@ -1,6 +1,6 @@
 /**
  * @file luascript.h
- * 
+ *
  * The Forgotten Server - a free and open-source MMORPG server emulator
  * Copyright (C) 2020 Mark Samman <mark.samman@gmail.com>
  *
@@ -563,6 +563,8 @@ class LuaScriptInterface
 		static int luaGameHasEffect(lua_State* L);
 		static int luaGameHasDistanceEffect(lua_State* L);
 
+		static int luaGameIsDay(lua_State *L);
+
 		// Variant
 		static int luaVariantCreate(lua_State* L);
 
@@ -743,7 +745,7 @@ class LuaScriptInterface
 		static int luaContainerHasItem(lua_State* L);
 		static int luaContainerAddItem(lua_State* L);
 		static int luaContainerAddItemEx(lua_State* L);
-		
+
 		static int luaContainerGetCorpseOwner(lua_State* L);
 		static int luaContainerRegisterReward(lua_State* L);
 
@@ -1006,7 +1008,7 @@ class LuaScriptInterface
 		static int luaPlayerPopupFYI(lua_State* L);
 
 		static int luaPlayerIsPzLocked(lua_State* L);
-	
+
 		static int luaPlayerGetClient(lua_State* L);
 
 		static int luaPlayerGetHouse(lua_State* L);
@@ -1286,7 +1288,7 @@ class LuaScriptInterface
 
 		static int luaMonsterTypeIsAttackable(lua_State* L);
 		static int luaMonsterTypeIsConvinceable(lua_State* L);
-		static int luaMonsterTypeIsSummonable(lua_State* L); 
+		static int luaMonsterTypeIsSummonable(lua_State* L);
 		static int luaMonsterTypeIsIllusionable(lua_State* L);
 		static int luaMonsterTypeIsHostile(lua_State* L);
 		static int luaMonsterTypeIsPushable(lua_State* L);
@@ -1314,10 +1316,10 @@ class LuaScriptInterface
 
 		static int luaMonsterTypeGetAttackList(lua_State* L);
 		static int luaMonsterTypeAddAttack(lua_State* L);
-		
+
 		static int luaMonsterTypeGetDefenseList(lua_State* L);
 		static int luaMonsterTypeAddDefense(lua_State* L);
-		
+
 		static int luaMonsterTypeGetElementList(lua_State* L);
 		static int luaMonsterTypeAddElement(lua_State* L);
 
@@ -1325,12 +1327,12 @@ class LuaScriptInterface
 
 		static int luaMonsterTypeGetVoices(lua_State* L);
 		static int luaMonsterTypeAddVoice(lua_State* L);
-		
+
 		static int luaMonsterTypeGetLoot(lua_State* L);
 
 		static int luaMonsterTypeGetCreatureEvents(lua_State* L);
 		static int luaMonsterTypeRegisterEvent(lua_State* L);
-		
+
 		static int luaMonsterTypeEventOnCallback(lua_State* L);
 		static int luaMonsterTypeEventType(lua_State* L);
 
@@ -1452,7 +1454,7 @@ class LuaScriptInterface
 		static int luaSpellAllowFarUse(lua_State* L);
 		static int luaSpellBlockWalls(lua_State* L);
 		static int luaSpellCheckFloor(lua_State* L);
-		
+
 		// Actions
 		static int luaCreateAction(lua_State* L);
 		static int luaActionOnUse(lua_State* L);
@@ -1499,7 +1501,7 @@ class LuaScriptInterface
 		static int luaGlobalEventTime(lua_State* L);
 		static int luaGlobalEventInterval(lua_State* L);
 
-		
+
 		// Weapon
 		static int luaCreateWeapon(lua_State* L);
 		static int luaWeaponId(lua_State* L);

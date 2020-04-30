@@ -1,6 +1,6 @@
 /**
  * @file luascript.cpp
- * 
+ *
  * The Forgotten Server - a free and open-source MMORPG server emulator
  * Copyright (C) 2020 Mark Samman <mark.samman@gmail.com>
  *
@@ -1998,7 +1998,7 @@ void LuaScriptInterface::registerFunctions()
 	registerEnum(MONSTERS_EVENT_DISAPPEAR)
 	registerEnum(MONSTERS_EVENT_MOVE)
 	registerEnum(MONSTERS_EVENT_SAY)
-	
+
 	registerEnum(SPELL_INSTANT)
 	registerEnum(SPELL_RUNE)
 
@@ -2159,6 +2159,8 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Game", "itemidHasMoveevent", LuaScriptInterface::luaGameItemidHasMoveevent);
 	registerMethod("Game", "hasDistanceEffect", LuaScriptInterface::luaGameHasDistanceEffect);
 	registerMethod("Game", "hasEffect", LuaScriptInterface::luaGameHasEffect);
+
+	registerMethod("Game", "isDay", LuaScriptInterface::luaGameIsDay);
 
 	// Variant
 	registerClass("Variant", "", LuaScriptInterface::luaVariantCreate);
@@ -2611,7 +2613,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Player", "isPzLocked", LuaScriptInterface::luaPlayerIsPzLocked);
 
 	registerMethod("Player", "getClient", LuaScriptInterface::luaPlayerGetClient);
-	
+
 	registerMethod("Player", "getHouse", LuaScriptInterface::luaPlayerGetHouse);
 	registerMethod("Player", "sendHouseWindow", LuaScriptInterface::luaPlayerSendHouseWindow);
 	registerMethod("Player", "setEditHouse", LuaScriptInterface::luaPlayerSetEditHouse);
@@ -3078,7 +3080,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Spell", "allowFarUse", LuaScriptInterface::luaSpellAllowFarUse);
 	registerMethod("Spell", "blockWalls", LuaScriptInterface::luaSpellBlockWalls);
 	registerMethod("Spell", "checkFloor", LuaScriptInterface::luaSpellCheckFloor);
-	
+
 	// Action
 	registerClass("Action", "", LuaScriptInterface::luaCreateAction);
 	registerMethod("Action", "onUse", LuaScriptInterface::luaActionOnUse);
@@ -3144,7 +3146,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("GlobalEvent", "onStartup", LuaScriptInterface::luaGlobalEventOnCallback);
 	registerMethod("GlobalEvent", "onShutdown", LuaScriptInterface::luaGlobalEventOnCallback);
 	registerMethod("GlobalEvent", "onRecord", LuaScriptInterface::luaGlobalEventOnCallback);
-	
+
 	// Weapon
 	registerClass("Weapon", "", LuaScriptInterface::luaCreateWeapon);
 	registerMethod("Weapon", "action", LuaScriptInterface::luaWeaponAction);
@@ -4592,13 +4594,13 @@ int LuaScriptInterface::luaGameLoadMap(lua_State* L)
 	g_dispatcher.addTask(createTask([path]() {
 		try {
 			g_game.loadMap(path);
-			
+
 		}
 		catch (const std::exception& e) {
 						// FIXME: Should only catch some exceptions
 				std::cout << "[Error - LuaScriptInterface::luaGameLoadMap] Failed to load map: "
 				 << e.what() << std::endl;
-			
+
 		}
 	}));
 	return 0;
@@ -5005,6 +5007,13 @@ int LuaScriptInterface::luaGameHasEffect(lua_State* L)
 	// Game.hasEffect(effectId)
 	uint8_t effectId = getNumber<uint8_t>(L, 1);
 	pushBoolean(L, g_game.hasEffect(effectId));
+	return 1;
+}
+
+int LuaScriptInterface::luaGameIsDay(lua_State *L)
+{
+	// Game.isDay()
+	pushBoolean(L, g_game.gameIsDay());
 	return 1;
 }
 
@@ -12287,7 +12296,7 @@ int LuaScriptInterface::luaHouseGetItems(lua_State* L)
 				pushUserdata<Item>(L, item);
 				setItemMetatable(L, -1, item);
 				lua_rawseti(L, -2, ++index);
-				
+
 			}
 		}
 	}

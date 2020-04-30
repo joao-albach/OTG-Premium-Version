@@ -4,7 +4,7 @@ local chests = {
 
 function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	if chests[item.uid] then
-		if player:getStorageValue(34123) == 1 then
+		if not player:getStorageValue(Storage.ThreatenedDreams.TroubledMission01) == 1 then
 			player:sendTextMessage(MESSAGE_EVENT_ADVANCE, 'It\'s empty.')
 			return true
 		end
